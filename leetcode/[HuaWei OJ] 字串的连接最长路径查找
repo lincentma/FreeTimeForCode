@@ -1,1 +1,55 @@
+import java.util.Scanner;
 
+public class LongestConnectPath {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] input = scanner.nextLine().trim().split(" ");
+        scanner.close();
+        System.out.print(longestPath(input));
+    }
+
+    private static String longestPath(String[] input) {
+        int[][] path = new int[input.length][input.length]; //定义数组记录可以连接的字串  
+        String[][] connectString = new String[input.length][input.length];  //定义数组存储可以连接字串的尾部  
+
+        for (int i = 0; i < input.length; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j].indexOf(input[i].substring(1)) == 0) { //当一个字串从index为1开始的一段，是在另一个字串index=0的部分  
+                    path[i][j] = 1;   //记录这两个字串的坐标  
+                    connectString[i][j] = input[j]
+                            .substring(input[j].length() - 1); //记录截取的末段字串  
+                }
+            }
+        }
+
+        for (int i = 0; i < path.length; i++)
+            for (int j = 0; j < path.length; j++)
+                for (int k = 0; k < path.length; k++) {
+                    if (path[i][j] != 0 && path[j][k] != 0) { //如果input[j]可以和input[i]和input[k]前后相接  
+                        int dist = path[i][j] + path[j][k];   //记录下这段路径长度  
+                        if (dist > path[i][k]) {  //如果这段路径大于原始的距离则数值交换  
+                            path[i][k] = dist;
+                            connectString[i][k] = connectString[i][j] + connectString[j][k]; //连接input[j]和input[k]的末段  
+                        }
+                    }
+                }
+
+        int max = 0;
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < path.length; i++)
+            for (int j = 0; j < path.length; j++) {  //遍历找出最长的路径  
+                if (max < path[i][j]) {
+                    max = path[i][j]; //记录路径的起始和末位坐标  
+                    start = i;
+                    end = j;
+                }
+            }
+
+        String result = null;
+        if (start != end)
+            result = input[start] + connectString[start][end];//将其实的字串和后面相接的末段连接在一起  
+        return result;
+
+    }
+}  
