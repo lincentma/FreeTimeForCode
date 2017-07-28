@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Created by ml on 2017/7/28.
+ * @throws InterruptedException
+ * @多线程
+ *问题描述：有4个线程和1个公共的字符数组。线程1的功能就是向数组输出A，线程2的功能就是向字符输出B，线程3的功能就是向
+ *数组输出C，线程4的功能就是向数组输出D。要求按顺序向数组赋值ABCDABCDABCD，ABCD的个数由线程函数1的参数指定。
+ */
+
+public class duoxiancheng {
+
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        while (scanner.hasNext()) {
+//            int n = scanner.nextInt();
+//            for (int i = 0; i < n; i++) {
+//                System.out.print("ABCD");
+//            }
+//            System.out.println();
+//        }
+//
+//        scanner.close();
+//    }
+
+    //所有共同操作的数组
+    public static List<String> g_write = new ArrayList<String>();
+
+    static class Runner implements Runnable{
+
+        private  String name;
+        private  int times;
+        private  List<String> chars;
+
+        public Runner(String name, List<String> chars, int times) {
+            this.name = name;
+            this.chars = chars;
+        }
+
+        @Override
+        public void run() {
+            chars.add(name);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int n = scanner.nextInt();
+            for (int i = 0; i < n; i++) {
+                Thread t1=new Thread(new Runner("A",g_write,4*i));
+                Thread t2=new Thread(new Runner("B",g_write,4*i+1));
+                Thread t3=new Thread(new Runner("C",g_write,4*i+2));
+                Thread t4=new Thread(new Runner("D",g_write,4*i+3));
+                t1.start();
+                t1.join();
+                t2.start();
+                t2.join();
+                t3.start();
+                t3.join();
+                t4.start();
+                t4.join();
+            }
+
+            for(int i=0;i<g_write.size();i++) {
+                System.out.print(g_write.get(i));
+            }
+
+        }
+//        scanner.close();
+    }
+}
