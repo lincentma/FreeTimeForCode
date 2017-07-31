@@ -1,0 +1,24 @@
+ /**
+  * - 设计一个算法，计算出n阶乘中尾部零的个数
+  * - 直接计算结果再判断基本数据类型无法承载
+  * - 这种想法认为，1000！ = 1000*999*...*1，而5*2= 10，故只要将所有的从1到1000的数分解成（2,5）组合，就可以知道尾数0的个数。
+  * - 同时，很显然，2的个数比5的个数要多，因此只需要关注5的分解的个数。
+  * - 令f(x)表示正整数x末尾所含有的“0”的个数，则有： 
+  * - 当0 < n < 5时，f(n!) = 0; 
+  * - 当n >= 5时，f(n!) = k + f(k!), 其中 k = n / 5（取整）。 
+  */ 
+
+class Solution {
+    /*
+     * param n: As desciption
+     * return: An integer, denote the number of trailing zeros in n!
+     */
+    public long trailingZeros(long n) {
+        long sum = 0;
+        while (n != 0) {
+            sum += n / 5;
+            n /= 5;
+        }
+        return sum;
+    }
+};
