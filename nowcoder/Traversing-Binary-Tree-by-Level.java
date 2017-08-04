@@ -16,7 +16,6 @@ public class TreeNode {
 */
 
 public class TreePrinter {
-    private static ArrayList<Integer> num = new ArrayList<Integer>();
     
     public int[][] printTree(TreeNode root) {
         // write code here
