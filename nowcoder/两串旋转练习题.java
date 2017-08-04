@@ -47,6 +47,8 @@ public class Rotation {
                 j++;
             } else {
                 // 如果j!=-1且当前字符匹配失败,则令i不变,j=next[j],即让pattern模式串右移j-next[j]个单位
+		// 移动位数 = 已匹配的字符数 - 对应的部分匹配值
+		// j = j - (j - next[j])
                 j = next[j];
             }
         }
