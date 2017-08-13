@@ -51,14 +51,6 @@ public class xiaoyixihuandeduilie {
     //dp[i][j]表示长度为i最后一个数是j的小易喜欢的数列的数量
     //最后的结果是dp[n][j]对j从1到k的遍历累加求和即可
 
-
-    //    前1个数的喜欢数列个数：
-    //    前2个数的喜欢数列个数：d(2)=1(序列：3；3前面没有比3小的)
-    //    前3个数的喜欢数列个数：d(3)=2(序列：3，4；4前面有个比它小的3，所以d(3)=d(2)+1)
-    //    前4个数的喜欢数列个数：d(4)=3(序列：3，4，8；8前面比它小的有3个数，所以 d(4)=max{d(1),d(2),d(3)}+1=3)
-    //    状态转移方程：d(i) = max{1, d(j)+1},其中j<i,A[j]<=A[i]
-
-
     public static int calNum2(int n, int k) {
 
         int MOD = (int) (1e9 + 7);
@@ -72,18 +64,21 @@ public class xiaoyixihuandeduilie {
         //
         for (int i = 1; i <= n; i++) {
             int sum = 0;
+            //计算i-1的个数
             for (int j = 1; j <= k; j++) {
                 sum += dp[i - 1][j];
                 sum %= MOD;
             }
+            //计算不符合条件的种类数
+            //第i位遍历
+            //在i-1位，找1到k的约数，这里巧妙地利用循环累加约数计算所有不符合的条件
             for (int j = 1; j <= k; j++) {
                 int sum2 = 0;
                 for (int z = j + j; z <= k; z += j) {
                     sum2 += dp[i - 1][z];
                     sum2 %= MOD;
                 }
-                System.out.println(i);
-                System.out.println(j);
+                // dp[i][j]表示长度为i最后一个数是j的小易喜欢的数列的数量 = i-1的结果数 - 不符合条件的为约数的结果数
                 dp[i][j] = (sum - sum2 + MOD) % MOD;
             }
         }
