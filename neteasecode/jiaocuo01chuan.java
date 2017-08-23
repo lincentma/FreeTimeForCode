@@ -20,7 +20,9 @@ import java.util.Scanner;
 
 //这个最开始以为是动态规划
 //做的时候发现就是遍历
-//动态规划还需要加强
+//通过维护一个全局变量max存储最长子串长度
+//字符交错，len+1，否则len=1
+
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
