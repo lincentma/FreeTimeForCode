@@ -11,6 +11,12 @@ import java.util.Scanner;
  */
  
  //这个题就是就找规律，手写罗列多种情况来找规律
+ //桶排序计算每一个元素的个数
+ //计算不同元素的种类
+ //规律：
+ //大于3种的不可能排列，为0
+ //2种为两种情况，AAAABBBB或者BBBBAAAA
+ //1种为一种情况
  
 public class Main {
     public static void main(String[] args) {
