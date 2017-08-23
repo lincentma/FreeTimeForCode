@@ -7,8 +7,15 @@ import java.util.Scanner;
  * 小易现在有一个长度为n的数列x,小易想把x变为一个等差数列。小易允许在数列上做交换任意两个位置的数值的操作,并且交换操作允许交换多次。但是有些数列通过交换还是不能变成等差数列,小易需要判别一个数列是否能通过交换操作变成等差数列
  */
  
- //直接排序判读
  //暴力求解
+ //直接调用Arrays.sort()对数组排序
+ //遍历判读是否每一个元素与前一个元素间隔d相等
+ //相等true不想等false
+ 
+ //左神方法
+ //等差数列求和公式
+ ![](https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2838679063,299287394&fm=58)
+
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
