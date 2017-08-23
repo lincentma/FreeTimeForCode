@@ -13,8 +13,9 @@ import java.util.Scanner;
  //相等true不想等false
  
  //左神方法
- //等差数列求和公式
- ![](https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2838679063,299287394&fm=58)
+ //等差数列求和公式:Sn=(a1+an)n/2 Sn=na1+n(n-1)d/2; (d为公差)
+ //遍历数组一次，就可以得到最小值a1，第二小值a2，以及d=a2-a1,数组个数n，数组和sum
+ //计算Sn - na1，除以d，判读是否与n(n-1)/2是否相等即可。
 
 public class Main {
     public static void main(String[] args) {
