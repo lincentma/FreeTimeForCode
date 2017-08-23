@@ -6,10 +6,23 @@ import java.util.Scanner;
  * 1、将a_i放入b序列的末尾
  * 2、逆置b序列
  * 小易需要你计算输出操作n次之后的b序列。
+ * 输入
+
+4
+1 2 3 4
+输出
+
+4 2 1 3
  */
+
  
  //就是找规律
  //遇到题先不慌，躲在纸上画出自己能想到的情况，并尝试总结出规律
+
+ //左神规律
+ //双端队列实现
+ //第一元素插入；第二个元素插在第一个元素的左边；第三个元素插在一个元素的右边；第四个元素插入在第一个元素的左边
+ 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
