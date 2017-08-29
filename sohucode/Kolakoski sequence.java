@@ -1,12 +1,12 @@
-package com.nowcoder.huawei2017;
+//要求：给定一数组，输出其构造的Kolakoski序列的前n项。
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Created by ml on 2017/8/24.
+ * Created by ml on 2017/8/28.
  */
-public class lastwordlength {
+public class Kolakoski {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         while (in.hasNext()) {
