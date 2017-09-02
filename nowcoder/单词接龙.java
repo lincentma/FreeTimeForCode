@@ -56,3 +56,59 @@ public class WordSolitaire {
         return 1;
     }
 }
+
+
+public class WordList {  
+  
+    public static boolean flag;  
+    public static void main(String[] args) {  
+        //String[] arr = {"1","2","3"};  
+        //String[] arr = {"xia","aq","qot","tou"};  
+        Scanner sc = new Scanner(System.in);  
+        int n = sc.nextInt();  
+        String[] arr = new String[n];  
+        for(int i=0; i<n; i++){  
+            arr[i] = sc.next();  
+        }  
+          
+        canArrangeWords(arr,0,arr.length);  
+        if(flag == true){  
+            System.out.println(1);  
+        }else {  
+            System.out.println(-1);  
+        }  
+          
+    }  
+  
+    private static void canArrangeWords(String[] arr, int start, int len) {  
+        if(start == len-1){  
+            int i=1;  
+            for(; i<len; i++){  
+                if(arr[i-1].charAt(arr[i-1].length()-1)!=arr[i].charAt(0)){  
+                    break;  
+                }  
+            }  
+            if(i==len){  
+                //测试用的代码  
+                flag = true;  
+            }  
+        }else {  
+            for(int i=start; i<len; i++){//两次交换保持原来的样子  
+                swap(arr, start, i);  
+                canArrangeWords(arr, start+1, len);  
+                swap(arr, start, i);  
+            }  
+        }  
+          
+    }  
+  
+    /** 
+     * 交换数组中i和j处的两个元素 
+     * */  
+    private static void swap(String[] arr, int i, int j) {  
+        String temp = new String();  
+        temp = arr[i];  
+        arr[i] = arr[j];  
+        arr[j] = temp;        
+    }     
+}  
