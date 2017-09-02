@@ -1,0 +1,43 @@
+/**
+题目描述：我们有一个栅栏，它有n个柱子，现在要给柱子染色，有k种颜色可以染。必须保证最多只有两个相邻的柱子颜色相同，求有多少种染色方案。
+样例：n = 3, k = 2, return 6
+        post 1,   post 2, post 3
+way1     0         0        1 
+way2     0         1        0
+way3     0         1        1
+way4     1         0        0
+way5     1         0        1
+way6     1         1        0
+*/
+
+/**
+最多只能有两个相邻的柱子颜色相同，那也就是说，任何一个柱子的颜色，都是与他上一个柱子以及上上个柱子的颜色是有关系的。如果他和上一个柱子颜色相同，那么就必须和上上个柱子颜色不同，如果和上一个柱子颜色不同，那么当前柱子的颜色与上上个柱子就没什么关系了。
+以上是基本逻辑，既然与之前的结论有关，那么可以考虑用动态规划。先看状态转移方程：
+我们用一个表格record记录染色到第i个柱子时，所有染色的方案种数，显然，record[0]表示对第一个柱子的染色方案，一共有k种；record[1]表示对前2个柱子的染色方案，record[1] = k * k，因为可以有两个相邻柱子颜色相同嘛。染色到第3个柱子时，情况就有点意思了：
+1. 如果第3个柱子的颜色跟第2个一样，那么他必须跟第一个柱子不一样，所以，前3个柱子的染色方案有k * (k - 1)种
+2. 如果第3个柱子的颜色跟第2个不一样，那么他跟第一个柱子没关系了，所以，前3个柱子的染色方案有k * k * (k - 1)种
+写出状态转移方程：record[i] = record[i - 2] * (k - 1) + record[i -1] * (k - 1)
+再看初始值，就是我们刚才分析的record[0] = k; record[1] = k * k
+*/
+public class Solution {
+    /**
+     * @param n non-negative integer, n posts
+     * @param k non-negative integer, k colors
+     * @return an integer, the total number of ways
+     */
+    public int numWays(int n, int k) {
+        // Write your code here
+        int dp[] = {0, k , k*k, 0};
+        if(n <= 2)
+            return dp[n];
+        if (k == 1)
+            return 0;
+        for(int i = 2; i < n; i++) {
+            dp[3] = (k - 1) * (dp[1] + dp[2]);
+            dp[1] = dp[2];
+            dp[2] = dp[3];
+        }
+        return dp[3];
+    }
+}
+
